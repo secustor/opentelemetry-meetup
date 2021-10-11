@@ -1,0 +1,14 @@
+namespaces:
+  redis-operator:
+  strimzi:
+
+helmRepos:
+  ot-helm: "https://ot-container-kit.github.io/helm-charts/"
+  strimzi: "https://strimzi.io/charts/"
+
+apps:
+  strimzi-operator:
+    enabled: true
+    namespace: strimzi
+    chart: strimzi/strimzi-kafka-operator
+    version: 0.25.0
