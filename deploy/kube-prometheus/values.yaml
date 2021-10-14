@@ -1,0 +1,3 @@
+grafana:
+  ingress:
+    enabled: true

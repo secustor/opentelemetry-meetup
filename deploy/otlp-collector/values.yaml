@@ -1,0 +1,53 @@
+agentCollector:
+  containerLogs:
+    enabled: true # enable collection of logs of running containers
+
+image:
+  repository: otel/opentelemetry-collector-contrib
+  tag: "0.36.0"
+
+command:
+  name: otelcontribcol
+
+config:
+  exporters:
+    otlp:
+      endpoint: tempo:55680
+      insecure: true
+    loki:
+      endpoint: http://loki:3100/loki/api/v1/push
+    #  tenant_id: "example"
+      labels:
+        resource:
+          # Allowing 'container.name' attribute and transform it to 'container_name', which is a valid Loki label name.
+          container.name: "container_name"
+          # Allowing 'k8s.cluster.name' attribute and transform it to 'k8s_cluster_name', which is a valid Loki label name.
+          k8s.cluster.name: "k8s_cluster_name"
+        attributes:
+          # Allowing 'severity' attribute and not providing a mapping, since the attribute name is a valid Loki label name.
+          severity: ""
+          http.status_code: "http_status_code"
+      headers:
+        "X-Custom-Header": "loki_rocks"
+
+  service:
+    pipelines:
+      logs:
+        exporters:
+          - loki
+        processors:
+          - memory_limiter
+          - batch
+        receivers:
+          - filelog
+          - otlp
+      traces:
+        exporters:
+          - otlp
+        processors:
+          - memory_limiter
+          - batch
+        receivers:
+          - otlp
+          - jaeger
+          - zipkin
