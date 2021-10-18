@@ -1,5 +1,5 @@
 
-KIND_ADDITIONAL_ARGS?=--kubeconfig /home/secustor/.kube/config
+KIND_ADDITIONAL_ARGS?=--kubeconfig ~/.kube/config
 KIND_CLUSTER_NAME?=kind
 
 # prepare setup
