@@ -56,11 +56,11 @@ fun main(args: Array<String>) {
   }
 
   // Load properties from file
-  val props = loadConfig(args[0])
+  val props = Properties()
+  props["bootstrap.servers"] = args[0]
 
   // Create topic if needed
   val topic = args[1]
-  createTopic(topic, 1, 3, props)
 
   // Add additional properties.
   props[ACKS_CONFIG] = "all"

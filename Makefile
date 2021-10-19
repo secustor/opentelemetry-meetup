@@ -9,11 +9,8 @@ create-kind-cluster:
 set-context:
 	kubectl config set-context kind-${KIND_CLUSTER_NAME}
 
-deploy-setup: deploy-ingress
+deploy-setup:
 	helmsman -f ./deploy/setup.yaml -apply
-
-deploy-ingress:
-	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 
 deploy-kafka:
 	kubectl apply -f ./deploy/kafka_cluster.yaml
@@ -21,4 +18,3 @@ deploy-kafka:
 # teardown setup
 delete-kind-cluster:
 	kind delete cluster --name ${KIND_CLUSTER_NAME}
-

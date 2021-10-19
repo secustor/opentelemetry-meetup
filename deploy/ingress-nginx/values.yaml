@@ -1,0 +1,27 @@
+
+controller:
+  # forward traces to otlp collector running on the same node
+  config:
+    enable-opentracing: "true"
+    zipkin-collector-host: "${HOST_IP}"
+  extraEnvs:
+  - name: HOST_IP
+    valueFrom:
+      fieldRef:
+        fieldPath: status.hostIP
+
+  watchIngressWithoutClass: true
+
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+
+  # these are Kind specific, this allows to forward port 80 and 443 on the host so that the ingress is reachable using localhost
+  updateStrategy:
+    type: Recreate
+  hostPort:
+    enabled: true
+  service:
+    type: NodePort
