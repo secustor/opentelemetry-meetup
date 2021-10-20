@@ -10,6 +10,7 @@ helmRepos:
   grafana: "https://grafana.github.io/helm-charts"
   prometheus-community: https://prometheus-community.github.io/helm-charts
   ingress-nginx: https://kubernetes.github.io/ingress-nginx
+  jaegertracing: https://jaegertracing.github.io/helm-charts
 
 apps:
   kube-prometheus:
