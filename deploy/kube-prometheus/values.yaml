@@ -1,6 +1,11 @@
+commonLabels:
+  prometheus: kube-prometheus
+
 grafana:
   ingress:
     enabled: true
+    hosts:
+      - grafana.example.com
 
   additionalDataSources:
    - name: Loki
@@ -15,5 +20,17 @@ grafana:
      editable: false
      orgId: 1
      type: tempo
-     url: http://tempo
+     url: http://tempo:3100
      version: 1
+
+  serviceMonitor:
+    enabled: true
+    additionalLabels:
+      prometheus: kube-prometheus
+
+prometheus:
+  prometheusSpec:
+    # define label to monitor external service monitor objects
+    serviceMonitorSelector:
+      matchLabels:
+        prometheus: kube-prometheus

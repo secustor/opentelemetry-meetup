@@ -17,7 +17,7 @@ apps:
     enabled: true
     namespace: monitoring
     chart: prometheus-community/kube-prometheus-stack
-    version: 19.0.3
+    version: 19.2.2
     valuesFiles:
       -  ./kube-prometheus/values.yaml
     priority: -95
@@ -40,18 +40,28 @@ apps:
   tempo:
     enabled: true
     namespace: monitoring
-    chart: grafana/tempo
-    version: 0.7.7
+    chart: ../../grafana-helm-charts/charts/tempo
+    version: 0.8.0
     valuesFiles:
       - ./tempo/values.yaml
     priority: -80
+  otlp-agent:
+    enabled: true
+    namespace: monitoring
+    chart: ../../opentelemetry-helm-charts/charts/opentelemetry-collector
+    version: 0.7.0
+    valuesFiles:
+      - ./opentelemetry/common.yaml
+      - ./opentelemetry/agent/values.yaml
+    priority: -75
   otlp-collector:
     enabled: true
     namespace: monitoring
     chart: ../../opentelemetry-helm-charts/charts/opentelemetry-collector
     version: 0.7.0
     valuesFiles:
-     - ./otlp-collector/values.yaml
+      - ./opentelemetry/common.yaml
+      - ./opentelemetry/collector/values.yaml
     priority: -75
   strimzi-operator:
     enabled: true

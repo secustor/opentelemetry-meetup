@@ -1,11 +1,3 @@
-agentCollector:
-  containerLogs:
-    enabled: true # enable collection of logs of running containers
-  configOverride:
-    receivers:
-      filelog:
-        start_at: end
-
 config:
   exporters:
     otlp:
@@ -15,7 +7,7 @@ config:
 
     loki:
       endpoint: http://loki:3100/loki/api/v1/push
-    #  tenant_id: "example"
+      #  tenant_id: "example"
       labels:
         attributes:
           # Allowing 'k8.container.name' attribute and transform it to 'container_name', which is a valid Loki label name.
@@ -30,9 +22,9 @@ config:
         "X-Custom-Header": "loki_rocks"
 
   service:
-    telemetry:
-      logs:
-        level: "debug"
+    #    telemetry:
+    #      logs:
+    #        level: "debug"
     pipelines:
       logs:
         exporters:
@@ -41,7 +33,6 @@ config:
           - memory_limiter
           - batch
         receivers:
-          - filelog
           - otlp
       traces:
         exporters:
@@ -53,3 +44,12 @@ config:
           - otlp
           - jaeger
           - zipkin
+
+# TODO contribute by default activated otlp-http port
+ports:
+  otlp-http:
+    enabled: true
+    containerPort: 4318
+    servicePort: 4318
+    hostPort: 4318
+    protocol: TCP

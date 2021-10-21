@@ -16,6 +16,15 @@ nodes:
       - containerPort: 443
         hostPort: 443
         protocol: TCP
+      # KAFKA
       - containerPort: 9094
         hostPort: 9094
+        protocol: TCP
+      # OTLP GRCP
+      - containerPort: 4317
+        hostPort: 4317
+        protocol: TCP
+      # OTLP HTTP
+      - containerPort: 4318
+        hostPort: 4318
         protocol: TCP

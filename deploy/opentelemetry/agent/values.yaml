@@ -1,0 +1,24 @@
+agentCollector:
+  containerLogs:
+    enabled: true # enable collection of logs of running containers
+  configOverride:
+    receivers:
+      filelog:
+        start_at: end
+      otlp:
+        protocols:
+          http:
+            # allow other origin for testing
+            cors_allowed_origins:
+              - http://localhost:3000
+              - http://localhost:80
+
+service:
+  #    telemetry:
+  #      logs:
+  #        level: "debug"
+  pipelines:
+    logs:
+# add filelog receiver to common
+      receivers:
+        - filelog

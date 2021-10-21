@@ -8,3 +8,5 @@ config:
 
 serviceMonitor:
   enabled: true
+  additionalLabels:
+    prometheus: kube-prometheus
