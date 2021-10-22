@@ -28,6 +28,14 @@ grafana:
     additionalLabels:
       prometheus: kube-prometheus
 
+  env:
+    JAEGER_AGENT_PORT: 6831
+
+  envValueFrom:
+    JAEGER_AGENT_HOST:
+      fieldRef:
+        fieldPath: status.hostIP
+
 prometheus:
   prometheusSpec:
     # define label to monitor external service monitor objects

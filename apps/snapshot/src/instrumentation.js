@@ -1,4 +1,5 @@
 import {AlwaysOnSampler, ParentBasedSampler, W3CTraceContextPropagator} from "@opentelemetry/core";
+import { JaegerPropagator } from "@opentelemetry/propagator-jaeger";
 import {WebTracerProvider} from "@opentelemetry/sdk-trace-web";
 import {Resource} from "@opentelemetry/resources";
 import {BatchSpanProcessor, ConsoleSpanExporter, SimpleSpanProcessor} from "@opentelemetry/sdk-trace-base";
@@ -12,8 +13,8 @@ import {SemanticResourceAttributes} from "@opentelemetry/semantic-conventions";
 
 export function setupInstrumentation() {
     /* Set Global Propagator */
-    // api.propagation.setGlobalPropagator(new W3CTraceContextPropagator());
-    console.log("no propagator")
+    api.propagation.setGlobalPropagator(new JaegerPropagator());
+    console.log("jaeger")
     const provider = new WebTracerProvider({
         resource: new Resource({
             // https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/resource/semantic_conventions/README.md#semantic-attributes-with-sdk-provided-default-value
@@ -61,7 +62,7 @@ export function setupInstrumentation() {
         // Changing default contextManager to use ZoneContextManager - supports asynchronous operations - optional
         contextManager: new ZoneContextManager(),
         // use the W3C standard for trace propagation
-        // propagator: new W3CTraceContextPropagator(),
+        propagator: new JaegerPropagator(),
     });
 
     registerInstrumentations({

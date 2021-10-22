@@ -1,4 +1,10 @@
 config:
+  receivers:
+    jaeger:
+      protocols:
+        thrift_compact:
+          endpoint: 0.0.0.0:6831
+
   exporters:
     otlp:
       endpoint: tempo:4317
@@ -53,3 +59,9 @@ ports:
     servicePort: 4318
     hostPort: 4318
     protocol: TCP
+  thrift-compact:
+    enabled: true
+    containerPort: 6831
+    servicePort: 6831
+    hostPort: 6831
+    protocol: UDP
