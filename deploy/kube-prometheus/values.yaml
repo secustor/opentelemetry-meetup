@@ -5,7 +5,7 @@ grafana:
   ingress:
     enabled: true
     hosts:
-      - grafana.example.com
+      - grafana.testing.com
 
   additionalDataSources:
    - name: Loki

@@ -17,7 +17,7 @@ standaloneCollector:
 ingress:
   enabled: true
   hosts:
-    - host: collector.example.com
+    - host: collector.testing.com
       paths:
         - path: /
           pathType: Prefix
