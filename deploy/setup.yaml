@@ -2,6 +2,7 @@ namespaces:
   ingress:
   strimzi:
   monitoring:
+  app:
 
 helmRepos:
   ot-helm: "https://ot-container-kit.github.io/helm-charts/"
@@ -69,3 +70,12 @@ apps:
     namespace: strimzi
     chart: strimzi/strimzi-kafka-operator
     version: 0.25.0
+
+# example applictions
+  snapshot:
+    enabled: true
+    namespace: app
+    chart: ../apps/snapshot/helm
+    version: 0.1.0
+    valuesFiles:
+      - ./snapshot/values.yaml

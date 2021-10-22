@@ -1,4 +1,3 @@
-import * as api from "@opentelemetry/api";
 import {AlwaysOnSampler, ParentBasedSampler, W3CTraceContextPropagator} from "@opentelemetry/core";
 import {WebTracerProvider} from "@opentelemetry/sdk-trace-web";
 import {Resource} from "@opentelemetry/resources";
@@ -7,19 +6,20 @@ import {OTLPTraceExporter} from "@opentelemetry/exporter-otlp-http";
 import {ZoneContextManager} from "@opentelemetry/context-zone";
 import {registerInstrumentations} from "@opentelemetry/instrumentation";
 import * as autoInstrumentationAPI from "@opentelemetry/auto-instrumentations-web";
+import * as api from "@opentelemetry/api";
+import {SemanticResourceAttributes} from "@opentelemetry/semantic-conventions";
 
 
 export function setupInstrumentation() {
     /* Set Global Propagator */
-    // use the W3C standard for trace propagation
-    api.propagation.setGlobalPropagator(new W3CTraceContextPropagator());
-
+    // api.propagation.setGlobalPropagator(new W3CTraceContextPropagator());
+    console.log("no propagator")
     const provider = new WebTracerProvider({
         resource: new Resource({
             // https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/resource/semantic_conventions/README.md#semantic-attributes-with-sdk-provided-default-value
-            "service.name": "snapshot",
-            "service.namespace": "example.meetup",
-            "service.version": "0.1.0",
+            [SemanticResourceAttributes.SERVICE_NAME]: "snapshot",
+            [SemanticResourceAttributes.SERVICE_NAMESPACE]: "example.meetup",
+            [SemanticResourceAttributes.SERVICE_VERSION]: "0.1.0",
         }),
         // this is the same as directly using the AlwaysOnSampler, but this shows how to respect the parent.
         // https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-core#parentbased-sampler
@@ -34,18 +34,15 @@ export function setupInstrumentation() {
             root: new AlwaysOnSampler()
         }),
     });
-// log to console
+
+    // add processors
     provider.addSpanProcessor(new SimpleSpanProcessor(new ConsoleSpanExporter()));
 
-    const url = `http://collector.testing.com/v1/traces`
-    console.log(url)
-    const collectorOptions = {
-        url, // url is optional and can be omitted - default is http://localhost:55681/v1/traces
+    const exporter = new OTLPTraceExporter({
+        url: "http://collector.testing.com/v1/traces", // url is optional and can be omitted - default is http://localhost:55681/v1/traces
         headers: {}, // an optional object containing custom headers to be sent with each request
         concurrencyLimit: 10, // an optional limit on pending requests
-    };
-
-    const exporter = new OTLPTraceExporter(collectorOptions);
+    });
     provider.addSpanProcessor(new BatchSpanProcessor(exporter, {
         // The maximum queue size. After the size is reached spans are dropped.
         maxQueueSize: 100,
@@ -63,6 +60,8 @@ export function setupInstrumentation() {
     provider.register({
         // Changing default contextManager to use ZoneContextManager - supports asynchronous operations - optional
         contextManager: new ZoneContextManager(),
+        // use the W3C standard for trace propagation
+        // propagator: new W3CTraceContextPropagator(),
     });
 
     registerInstrumentations({
