@@ -1,4 +1,10 @@
-import {AlwaysOnSampler, ParentBasedSampler, W3CTraceContextPropagator} from "@opentelemetry/core";
+import {
+    AlwaysOnSampler,
+    ParentBasedSampler,
+    CompositePropagator,
+    W3CTraceContextPropagator,
+    W3CBaggagePropagator
+} from "@opentelemetry/core";
 import { JaegerPropagator } from "@opentelemetry/propagator-jaeger";
 import {WebTracerProvider} from "@opentelemetry/sdk-trace-web";
 import {Resource} from "@opentelemetry/resources";
@@ -13,8 +19,9 @@ import {SemanticResourceAttributes} from "@opentelemetry/semantic-conventions";
 
 export function setupInstrumentation() {
     /* Set Global Propagator */
-    api.propagation.setGlobalPropagator(new JaegerPropagator());
-    console.log("jaeger")
+    // support jaeger, W3C and W3C Baggage propagation
+    const propagator = new CompositePropagator({propagators: [new JaegerPropagator(), new W3CTraceContextPropagator(), new W3CBaggagePropagator()]})
+    api.propagation.setGlobalPropagator(propagator);
     const provider = new WebTracerProvider({
         resource: new Resource({
             // https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/resource/semantic_conventions/README.md#semantic-attributes-with-sdk-provided-default-value
@@ -61,8 +68,8 @@ export function setupInstrumentation() {
     provider.register({
         // Changing default contextManager to use ZoneContextManager - supports asynchronous operations - optional
         contextManager: new ZoneContextManager(),
-        // use the W3C standard for trace propagation
-        propagator: new JaegerPropagator(),
+        // use the composite propagator for trace propagation
+        propagator: propagator,
     });
 
     registerInstrumentations({
@@ -71,6 +78,7 @@ export function setupInstrumentation() {
                 // load custom configuration for xml-http-request instrumentation
                 '@opentelemetry/instrumentation-xml-http-request': {
                     clearTimingResources: true,
+                    propagateTraceHeaderCorsUrls: RegExp("/*.\\.testing\\.com/"), // send propagation header to this url(s)
                 },
             }),
         ],

@@ -13,7 +13,7 @@ import (
 	"log"
 )
 
-func InitTracer() *sdktrace.TracerProvider {
+func InitTracer(serviceName string) *sdktrace.TracerProvider {
 	client := otlptracehttp.NewClient()
 	exporter, err := otlptrace.New(context.Background(), client)
 
@@ -27,7 +27,7 @@ func InitTracer() *sdktrace.TracerProvider {
 		sdktrace.WithSampler(sdktrace.AlwaysSample()),
 		sdktrace.WithBatcher(exporter),
 		sdktrace.WithResource(resource.NewWithAttributes(semconv.SchemaURL,
-			semconv.ServiceNameKey.String("producer"),
+			semconv.ServiceNameKey.String(serviceName),
 			semconv.ServiceNamespaceKey.String("example.meetup"),
 			semconv.ServiceVersionKey.String("0.1.0"),
 		)),

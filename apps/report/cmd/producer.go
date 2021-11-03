@@ -18,7 +18,7 @@ import (
 )
 
 func main() {
-	tp := otelWrapper.InitTracer()
+	tp := otelWrapper.InitTracer("producer")
 	logger := logging.GetRootLogger()
 	defer logger.Sync()
 	appConfig := config.GetConfig()
@@ -43,19 +43,21 @@ func main() {
 	kafkaHandler := func(w http.ResponseWriter, req *http.Request) {
 		ctx := req.Context()
 		span := trace.SpanFromContext(ctx)
-		spanLogger := logger.With("traceID", span.SpanContext().TraceID(), "spanID", span.SpanContext().SpanID())
+		defer span.End()
+		spanLogger := logging.WithSpanContext(logger, span)
 		//bag := baggage.FromContext(ctx)
 		//span.AddEvent("handling this...", trace.WithAttributes(uk.String(bag.Member("username").Value())))
 
 		bodyBytes, err := io.ReadAll(req.Body)
 		if err != nil {
+			span.RecordError(err)
 			span.SetStatus(codes.Error, err.Error())
 			spanLogger.Errorw("Failed to request body", "error", err)
 		}
 
 		body := string(bodyBytes)
 
-		if strings.Contains(body, "custom_producer_error") { // throw custom error
+		if strings.Contains(body, "producer_error") { // throw custom error if a custom message is received
 			span.SetStatus(codes.Error, "custom producer error")
 			spanLogger.Error("Custom producer error")
 		} else {
@@ -75,6 +77,7 @@ func main() {
 
 		_, err = io.WriteString(w, "{\"msg\": \"Hello, world!\"}")
 		if err != nil {
+			span.RecordError(err)
 			span.SetStatus(codes.Error, err.Error())
 			spanLogger.Errorw("Failed to write answer", "error", err)
 		}

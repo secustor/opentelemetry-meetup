@@ -21,6 +21,14 @@ const PhotoContextProvider = props => {
           error
         );
       });
+    axios.post(`http://report.testing.com/kafka/receiver`,query).then(response => {
+      console.log(`send data ${query} and got status: ${response.status}`)
+    }).catch(error => {
+      console.log(
+          "Encountered an error with sending data",
+          error
+      );
+    })
   };
   return (
     <PhotoContext.Provider value={{ images, loading, runSearch }}>

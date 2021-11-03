@@ -35,7 +35,7 @@ import (
 )
 
 func main() {
-	tp := otelWrapper.InitTracer()
+	tp := otelWrapper.InitTracer("consumer")
 	logger := logging.GetRootLogger()
 	defer logger.Sync()
 
@@ -86,13 +86,13 @@ func printMessage(msg *sarama.ConsumerMessage, logger *zap.SugaredLogger) {
 	))
 	defer span.End()
 
-	spanLogger := logger.With("traceID", span.SpanContext().TraceID(), "spanID", span.SpanContext().SpanID())
+	spanLogger := logging.WithSpanContext(logger, span)
 
 	// Emulate Work loads
 	time.Sleep(500 * time.Microsecond)
 
 	message := string(msg.Value)
-	if message == "consumer_error" {
+	if message == "consumer_error" { // throw custom error if a custom message is received
 		err := fmt.Errorf("custom customer error")
 		span.RecordError(err)
 		span.SetStatus(codes.Error, "custom_customer_error")
