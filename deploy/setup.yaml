@@ -21,6 +21,24 @@ apps:
     version: 19.2.2
     valuesFiles:
       -  ./kube-prometheus/values.yaml
+    priority: -100
+  otlp-agent:
+    enabled: true
+    namespace: monitoring
+    chart: ../../opentelemetry-helm-charts/charts/opentelemetry-collector
+    version: 0.7.0
+    valuesFiles:
+      - ./opentelemetry/common.yaml
+      - ./opentelemetry/agent/values.yaml
+    priority: -95
+  otlp-collector:
+    enabled: true
+    namespace: monitoring
+    chart: ../../opentelemetry-helm-charts/charts/opentelemetry-collector
+    version: 0.7.0
+    valuesFiles:
+      - ./opentelemetry/common.yaml
+      - ./opentelemetry/collector/values.yaml
     priority: -95
   ingress-nginx:
     enabled: true
@@ -47,29 +65,13 @@ apps:
     valuesFiles:
       - ./tempo/values.yaml
     priority: -80
-  otlp-agent:
-    enabled: true
-    namespace: monitoring
-    chart: ../../opentelemetry-helm-charts/charts/opentelemetry-collector
-    version: 0.7.0
-    valuesFiles:
-      - ./opentelemetry/common.yaml
-      - ./opentelemetry/agent/values.yaml
-    priority: -75
-  otlp-collector:
-    enabled: true
-    namespace: monitoring
-    chart: ../../opentelemetry-helm-charts/charts/opentelemetry-collector
-    version: 0.7.0
-    valuesFiles:
-      - ./opentelemetry/common.yaml
-      - ./opentelemetry/collector/values.yaml
-    priority: -75
   strimzi-operator:
     enabled: true
     namespace: strimzi
     chart: strimzi/strimzi-kafka-operator
-    version: 0.25.0
+    version: 0.26.0
+    valuesFiles:
+      - ./strimzi/values.yaml
 
 # example applictions
   snapshot:
@@ -79,3 +81,10 @@ apps:
     version: 0.1.0
     valuesFiles:
       - ./snapshot/values.yaml
+  report:
+    enabled: true
+    namespace: app
+    chart: ../apps/report/helm
+    version: 0.1.0
+    valuesFiles:
+      - ./report/values.yaml

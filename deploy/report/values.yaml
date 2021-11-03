@@ -1,0 +1,21 @@
+producer:
+  image:
+    tag: "test"
+
+consumer:
+  image:
+    tag: "test"
+
+kafka:
+  bootstrapServer: my-cluster-kafka-bootstrap:9092
+
+otlp:
+  endpoint: http://otlp-collector-opentelemetry-collector.monitoring.svc.cluster.local:4317
+
+ingress:
+  enabled: true
+  hosts:
+    - host: report.testing.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific

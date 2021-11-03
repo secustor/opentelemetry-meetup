@@ -1,9 +1,13 @@
+OS ?= $(shell go env GOOS)
+ARCH ?= $(shell go env GOARCH)
 
 KIND_ADDITIONAL_ARGS?=--kubeconfig ~/.kube/config
 KIND_CLUSTER_NAME?=kind
 
 # Images
 APP_SNAPSHOT_IMAGE?=localhost/snapshot:test
+APP_PRODUCER_IMAGE?=localhost/producer:test
+APP_CONSUMER_IMAGE?=localhost/consumer:test
 
 
 # prepare setup
@@ -12,6 +16,8 @@ create-kind-cluster:
 
 set-context:
 	kubectl config set-context kind-${KIND_CLUSTER_NAME}
+
+prepare-environment: deploy-setup deploy-kafka
 
 deploy-setup:
 	helmsman -f ./deploy/setup.yaml -apply
@@ -27,15 +33,25 @@ delete-kind-cluster:
 prepare-apps: build-all load-all
 
 # Build applications
-build-all: build-snapshot
+build-all: build-snapshot build-producer build-consumer
 
 build-snapshot:
 	buildah build -t ${APP_SNAPSHOT_IMAGE} ./apps/snapshot
 
+build-producer:
+	buildah build --platform=$(OS)/$(ARCH) --build-arg CMD_BIN=cmd/producer.go -t ${APP_PRODUCER_IMAGE} apps/report
 
+build-consumer:
+	buildah build --platform=$(OS)/$(ARCH) --build-arg CMD_BIN=cmd/consumer.go -t ${APP_CONSUMER_IMAGE} apps/report
 
 # Load images
-load-all: load-snapshot
+load-all: load-snapshot load-producer load-consumer
 
 load-snapshot:
 	kind load docker-image ${APP_SNAPSHOT_IMAGE}
+
+load-producer:
+	kind load docker-image ${APP_PRODUCER_IMAGE}
+
+load-consumer:
+	kind load docker-image ${APP_CONSUMER_IMAGE}
