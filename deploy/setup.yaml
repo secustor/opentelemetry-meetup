@@ -60,8 +60,8 @@ apps:
   tempo:
     enabled: true
     namespace: monitoring
-    chart: ../../grafana-helm-charts/charts/tempo
-    version: 0.8.0
+    chart: grafana/tempo
+    version: 0.8.1
     valuesFiles:
       - ./tempo/values.yaml
     priority: -80
