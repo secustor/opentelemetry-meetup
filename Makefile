@@ -1,6 +1,8 @@
 OS ?= $(shell go env GOOS)
 ARCH ?= $(shell go env GOARCH)
 
+BUILD_CMD?=docker
+
 KIND_ADDITIONAL_ARGS?=--kubeconfig ~/.kube/config
 KIND_CLUSTER_NAME?=kind
 
@@ -36,13 +38,13 @@ prepare-apps: build-all load-all
 build-all: build-snapshot build-producer build-consumer
 
 build-snapshot:
-	buildah build -t ${APP_SNAPSHOT_IMAGE} ./apps/snapshot
+	$(BUILD_CMD) build -t ${APP_SNAPSHOT_IMAGE} ./apps/snapshot
 
 build-producer:
-	buildah build --platform=$(OS)/$(ARCH) --build-arg CMD_BIN=cmd/producer.go -t ${APP_PRODUCER_IMAGE} apps/report
+	$(BUILD_CMD) build --platform=$(OS)/$(ARCH) --build-arg CMD_BIN=cmd/producer.go -t ${APP_PRODUCER_IMAGE} apps/report
 
 build-consumer:
-	buildah build --platform=$(OS)/$(ARCH) --build-arg CMD_BIN=cmd/consumer.go -t ${APP_CONSUMER_IMAGE} apps/report
+	$(BUILD_CMD) build --platform=$(OS)/$(ARCH) --build-arg CMD_BIN=cmd/consumer.go -t ${APP_CONSUMER_IMAGE} apps/report
 
 # Load images
 load-all: load-snapshot load-producer load-consumer
