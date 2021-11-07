@@ -1,11 +1,3 @@
-# as 2.4, which introduces un-ordered-writes, is no released yet, use the master
-image:
-  tag: main-afbbc2f-amd64
-
-config:
-  limits_config:
-    unordered_writes: true
-
 serviceMonitor:
   enabled: true
   additionalLabels:
