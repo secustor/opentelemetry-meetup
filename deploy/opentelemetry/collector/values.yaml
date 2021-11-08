@@ -1,0 +1,27 @@
+agentCollector:
+  enabled: false
+# deploy additional standalone collector
+standaloneCollector:
+  enabled: true
+  configOverride:
+    receivers:
+      otlp:
+        protocols:
+          http:
+            # allow other origin for testing
+            cors_allowed_origins:
+              - http://localhost:3000
+              - http://localhost:80
+
+
+ingress:
+  enabled: true
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,traceparent,tracestate
+  hosts:
+    - host: collector.testing.com
+      paths:
+        - path: /
+          pathType: Prefix
+          port: 4318

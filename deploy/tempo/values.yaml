@@ -1,0 +1,8 @@
+tempo:
+  extraArgs:
+    distributor.log-received-traces:
+
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    prometheus: kube-prometheus

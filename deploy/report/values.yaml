@@ -1,0 +1,25 @@
+producer:
+  image:
+    tag: "test"
+
+consumer:
+  image:
+    tag: "test"
+
+kafka:
+  bootstrapServer: my-cluster-kafka-bootstrap:9092
+
+otlp:
+  endpoint: http://otlp-collector-opentelemetry-collector.monitoring.svc.cluster.local:4318
+
+ingress:
+  enabled: true
+  annotations:
+    nginx.ingress.kubernetes.io/enable-opentracing: "true"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,traceparent,tracestate,uber-trace-id
+  hosts:
+    - host: report.testing.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific

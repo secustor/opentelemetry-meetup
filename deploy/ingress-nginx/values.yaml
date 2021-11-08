@@ -1,0 +1,36 @@
+
+controller:
+  # forward traces to otlp collector running on the same node
+  # TODO replace with open telemetry if available https://github.com/kubernetes/ingress-nginx/pull/7621
+  config:
+    enable-opentracing: true
+    jaeger-endpoint: http://${HOST_IP}:14268/api/traces
+    jaeger-propagation-format: jaeger
+    jaeger-service-name: nginx-ingress
+  #    jaeger-collector-host: ${HOST_IP}
+  #    jaeger-collector-port: 14268 # jaeger thrift
+  #    jaeger-collector-port: 14250 # jaeger grpc
+  extraEnvs:
+  - name: HOST_IP
+    valueFrom:
+      fieldRef:
+        fieldPath: status.hostIP
+
+
+
+  watchIngressWithoutClass: true
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        prometheus: kube-prometheus
+
+
+  # these are Kind specific, this allows to forward port 80 and 443 on the host so that the ingress is reachable using localhost
+  updateStrategy:
+    type: Recreate
+  hostPort:
+    enabled: true
+  service:
+    type: NodePort

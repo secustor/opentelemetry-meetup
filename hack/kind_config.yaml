@@ -2,7 +2,7 @@ kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
   - role: control-plane
-    image: kindest/node:v1.22.1@sha256:2f8d6b023f2b443bfa283a92ef8c02f9665e5fe1d1347ca1f61693d2b04f01fd
+    image: kindest/node:v1.22.2@sha256:f638a08c1f68fe2a99e724ace6df233a546eaf6713019a0b310130a4f91ebe7f
     kubeadmConfigPatches:
       - |
         kind: InitConfiguration
@@ -16,6 +16,15 @@ nodes:
       - containerPort: 443
         hostPort: 443
         protocol: TCP
+      # KAFKA
       - containerPort: 9094
         hostPort: 9094
+        protocol: TCP
+      # OTLP GRCP
+      - containerPort: 4317
+        hostPort: 4317
+        protocol: TCP
+      # OTLP HTTP
+      - containerPort: 4318
+        hostPort: 4318
         protocol: TCP
