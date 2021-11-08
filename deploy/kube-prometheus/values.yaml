@@ -54,6 +54,9 @@ grafana:
          enabled: true
        tracesToLogs:
          datasourceUid: default_loki
+#         tags:
+#           - "k8s.namespace.name"
+#           - "k8s.pod.name"
 #         lokiSearch: true
 
   serviceMonitor:
@@ -61,6 +64,7 @@ grafana:
     additionalLabels:
       prometheus: kube-prometheus
 
+# activate tracing of Grafana
   env:
     JAEGER_AGENT_PORT: 6831
 

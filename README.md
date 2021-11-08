@@ -1,11 +1,12 @@
 # OpenTelemetry Frontend to Backend Demo
 
-This repo contains the example used for the `Vienna DevOps & Security` meetup.
+This repo contains the example used for the `Vienna DevOps & Security` meetup.    
+Slides: https://docs.google.com/presentation/d/1jPDH8Csv-Qle7Z-P7rFJgjOsBpgKeehPhjFPqTRET1Y/edit?usp=sharing
 
 Requirements: 
  - [Kind](https://github.com/kubernetes-sigs/kind/issues) ( node-image >1.16.x )
  - [Helmsman](https://github.com/Praqma/helmsman)
- - Docker / buildah ( with Docker alias )
+ - Docker / Buildah ( with Docker alias )
 
 This demo deploys ingresses for `*.testing.com`.   
 To make it work you have to rewrite the DNS answers to localhost.
