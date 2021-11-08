@@ -12,13 +12,53 @@ agentCollector:
             cors_allowed_origins:
               - http://localhost:3000
               - http://localhost:80
+    processors:
+      k8sattributes:
+        filter:
+          node_from_env_var: KUBE_NODE_NAME
 
-service:
-  #    telemetry:
-  #      logs:
-  #        level: "debug"
-  pipelines:
-    logs:
-# add filelog receiver to common
-      receivers:
-        - filelog
+config:
+  service:
+    #    telemetry:
+    #      logs:
+    #        level: "debug"
+    pipelines:
+      logs:
+  # add filelog receiver to common
+        receivers:
+          - filelog
+        processors:
+          - memory_limiter
+          - k8sattributes
+          - batch
+      traces:
+        processors:
+          - memory_limiter
+          - k8sattributes
+          - batch
+      metrics:
+        processors:
+          - memory_limiter
+          - k8sattributes
+          - batch
+
+# used for k8attributes
+extraEnvs:
+  - name: KUBE_NODE_NAME
+    valueFrom:
+      fieldRef:
+        apiVersion: v1
+        fieldPath: spec.nodeName
+
+clusterRole:
+  create: true
+  rules:
+   - apiGroups:
+     - ''
+     resources:
+     - 'pods'
+     - 'nodes'
+     verbs:
+     - 'get'
+     - 'list'
+     - 'watch'
