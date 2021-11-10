@@ -11,7 +11,7 @@ Requirements:
 This demo deploys ingresses for `*.testing.com`.   
 To make it work you have to rewrite the DNS answers to localhost.
 
-For me, using Arch with Gnome, it has been as simple as adding this line to your network manager    
+For Linux it has been as simple as adding this line to your network manager ( tested with Arch/Gnome )     
 `echo "address=/testing.com/127.0.0.1" > /etc/NetworkManager/dnsmasq.d/testDomains.conf`
 
 
