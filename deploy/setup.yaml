@@ -25,8 +25,8 @@ apps:
   otlp-agent:
     enabled: true
     namespace: monitoring
-    chart: ../../opentelemetry-helm-charts/charts/opentelemetry-collector
-    version: 0.7.0
+    chart: ./opentelemetry/charts/opentelemetry-collector
+    version: 0.8.0
     valuesFiles:
       - ./opentelemetry/common.yaml
       - ./opentelemetry/agent/values.yaml
@@ -34,8 +34,8 @@ apps:
   otlp-collector:
     enabled: true
     namespace: monitoring
-    chart: ../../opentelemetry-helm-charts/charts/opentelemetry-collector
-    version: 0.7.0
+    chart: ./opentelemetry/charts/opentelemetry-collector
+    version: 0.8.0
     valuesFiles:
       - ./opentelemetry/common.yaml
       - ./opentelemetry/collector/values.yaml

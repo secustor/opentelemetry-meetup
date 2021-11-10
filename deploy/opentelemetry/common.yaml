@@ -1,5 +1,6 @@
 config:
   receivers:
+    # TODO K8 Eventreceiver https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/k8seventsreceiver
     jaeger:
       protocols:
         thrift_compact:
@@ -50,18 +51,3 @@ config:
           - otlp
           - jaeger
           - zipkin
-
-# TODO contribute by default activated otlp-http port
-ports:
-  otlp-http:
-    enabled: true
-    containerPort: 4318
-    servicePort: 4318
-    hostPort: 4318
-    protocol: TCP
-  thrift-compact:
-    enabled: true
-    containerPort: 6831
-    servicePort: 6831
-    hostPort: 6831
-    protocol: UDP
