@@ -61,7 +61,7 @@ apps:
     enabled: true
     namespace: monitoring
     chart: grafana/tempo
-    version: 0.8.1
+    version: 0.9.0
     valuesFiles:
       - ./tempo/values.yaml
     priority: -80
