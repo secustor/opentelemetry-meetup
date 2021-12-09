@@ -45,7 +45,7 @@ apps:
     wait: true # wait till ready, else it will to call the ingress admission webhooks
     namespace: ingress
     chart: ingress-nginx/ingress-nginx
-    version: 4.0.6
+    version: 4.0.13
     valuesFiles:
       - ./ingress-nginx/values.yaml
     priority: -90
