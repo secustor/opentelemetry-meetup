@@ -69,7 +69,7 @@ apps:
     enabled: true
     namespace: strimzi
     chart: strimzi/strimzi-kafka-operator
-    version: 0.26.0
+    version: 0.28.0
     valuesFiles:
       - ./strimzi/values.yaml
 
