@@ -1176,20 +1176,20 @@
   resolved "https://registry.yarnpkg.com/@opentelemetry/api-metrics/-/api-metrics-0.27.0.tgz#d8eca344ed1155f3ea8a8133ade827b4bb90efbf"
   integrity sha512-tB79288bwjkdhPNpw4UdOEy3bacVwtol6Que7cAu8KEJ9ULjRfSiwpYEwJY/oER3xZ7zNFz0uiJ7N1jSiotpVA==
 
-"@opentelemetry/api@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/api/-/api-1.0.3.tgz#13a12ae9e05c2a782f7b5e84c3cbfda4225eaf80"
-  integrity sha512-puWxACExDe9nxbBB3lOymQFrLYml2dVOrd7USiVRnSbgXE+KwBu+HxFvxrzfqsiSda9IWsXJG1ef7C1O2/GmKQ==
+"@opentelemetry/api@1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/api/-/api-1.0.4.tgz#a167e46c10d05a07ab299fc518793b0cff8f6924"
+  integrity sha512-BuJuXRSJNQ3QoKA6GWWDyuLpOUck+9hAXNMCnrloc1aWVoy6Xq6t9PUV08aBZ4Lutqq2LEHM486bpZqoViScog==
 
-"@opentelemetry/auto-instrumentations-web@0.27.0":
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/auto-instrumentations-web/-/auto-instrumentations-web-0.27.0.tgz#5e22d5579c36a994f0eeb18580325b37e7ad068e"
-  integrity sha512-Nnqo58FGJ8O15ckRuzQXGcp8v9/EmU2PXQJu680IJ2MvUBahJ/30qiyrsnUdajurIN59nB/cQMxgXGz9B6uB/Q==
+"@opentelemetry/auto-instrumentations-web@0.27.2":
+  version "0.27.2"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/auto-instrumentations-web/-/auto-instrumentations-web-0.27.2.tgz#bc00ff5b06c090f8af0b4a545bc930add54bb862"
+  integrity sha512-L/dY2L0MPx9ewNaaxbsuqKTWZlNFuSaU8OgONbcMzQqHS+hZhzd1aKMQUO+RsEeKWOQDmtvgCMEXahT8PlsYkA==
   dependencies:
     "@opentelemetry/instrumentation" "^0.27.0"
-    "@opentelemetry/instrumentation-document-load" "^0.27.0"
+    "@opentelemetry/instrumentation-document-load" "^0.27.1"
     "@opentelemetry/instrumentation-fetch" "^0.27.0"
-    "@opentelemetry/instrumentation-user-interaction" "^0.27.0"
+    "@opentelemetry/instrumentation-user-interaction" "^0.28.1"
     "@opentelemetry/instrumentation-xml-http-request" "^0.27.0"
 
 "@opentelemetry/context-zone-peer-dep@1.0.1":
@@ -1231,10 +1231,10 @@
     "@opentelemetry/sdk-metrics-base" "0.26.0"
     "@opentelemetry/sdk-trace-base" "1.0.0"
 
-"@opentelemetry/instrumentation-document-load@^0.27.0":
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/instrumentation-document-load/-/instrumentation-document-load-0.27.0.tgz#83f762224fa794616a47e9865f688288808a40d2"
-  integrity sha512-thtPS4G1AR0HKcS1rQqcYZarQc4uH0wWxkbF7x9B1pClM9aJndApSc0oiiDT0qwuoxjPaWa+aPBtaSb7BKOZAw==
+"@opentelemetry/instrumentation-document-load@^0.27.1":
+  version "0.27.1"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/instrumentation-document-load/-/instrumentation-document-load-0.27.1.tgz#3248364b6a08df758552e169e848fe883ac73070"
+  integrity sha512-C51Ia0CYi9LCE3vTzycO4bCgnxKWll04c3q9KaG6pj6j70c+3JdJGydn0wtByRTs+ax3zk4JacvadtDcWi9ylQ==
   dependencies:
     "@opentelemetry/core" "^1.0.0"
     "@opentelemetry/instrumentation" "^0.27.0"
@@ -1252,10 +1252,10 @@
     "@opentelemetry/sdk-trace-web" "1.0.1"
     "@opentelemetry/semantic-conventions" "1.0.1"
 
-"@opentelemetry/instrumentation-user-interaction@^0.27.0":
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/instrumentation-user-interaction/-/instrumentation-user-interaction-0.27.0.tgz#38d331df99136660a423c6d07d929c506ede3e5c"
-  integrity sha512-GD44cCxi6ONNFWLD1IfhHz6PbQnD1qYmoJB0JtJe4K5fL26rnPe5fAsaF5R6K/i/TtAfO/olFvIl9P/PO+ldVA==
+"@opentelemetry/instrumentation-user-interaction@^0.28.1":
+  version "0.28.1"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/instrumentation-user-interaction/-/instrumentation-user-interaction-0.28.1.tgz#f796b57aba80a52a41ed78d78eb7ed9a68a06ca0"
+  integrity sha512-HmaUeppDmsd14n7iYGISYiaGT4zl+gcpUXKUaTtNizcdBmlvukp0kehWY+5dgvwiGQms7mJpPdIPpVgAwhMymw==
   dependencies:
     "@opentelemetry/core" "^1.0.0"
     "@opentelemetry/instrumentation" "^0.27.0"
