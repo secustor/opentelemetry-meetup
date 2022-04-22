@@ -1197,7 +1197,7 @@
   resolved "https://registry.yarnpkg.com/@opentelemetry/context-zone-peer-dep/-/context-zone-peer-dep-1.0.1.tgz#802957f44e189f91222268a206d58f270b9e375e"
   integrity sha512-rJJFXWjzuuVGOuy0gCUYhbQAFuGrMnNroV+cfm4n+c+H5ewW2yS9NwH+P07OKKCWJbpJpuwEVH2j+oEfHrtVyQ==
 
-"@opentelemetry/context-zone@1.0.1":
+"@opentelemetry/context-zone@1.0.1", "@opentelemetry/context-zone@^1.0.0":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@opentelemetry/context-zone/-/context-zone-1.0.1.tgz#dc1af9cbc20ded069f26cb25fe46e28bb7a7c38d"
   integrity sha512-k1kyqCC75qfTpyr/V2HJIaorUKOLJ89unW4Pk9P9tV8e78vLC93olb1drRkXqmUzSzhEZBlvj1/sG1l7QQeeFw==
@@ -1279,6 +1279,18 @@
     "@opentelemetry/api-metrics" "0.27.0"
     require-in-the-middle "^5.0.3"
     semver "^7.3.2"
+    shimmer "^1.2.1"
+
+"@opentelemetry/plugin-react-load@^0.26.1":
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/plugin-react-load/-/plugin-react-load-0.26.1.tgz#b24f118c80cb39428cebf43600ad1fd9b3ee7c0f"
+  integrity sha512-UbbpukNtAjGPpGok+Wb0stPCpO3ymH+/wfH9+dKij8UVQ6SOaUp+B+AGiRrtXNFD0HoyudsBlsmNgHH9+MEl9g==
+  dependencies:
+    "@opentelemetry/context-zone" "^1.0.0"
+    "@opentelemetry/core" "^1.0.0"
+    "@opentelemetry/sdk-trace-base" "^1.0.0"
+    "@opentelemetry/sdk-trace-web" "^1.0.0"
+    "@opentelemetry/semantic-conventions" "^1.0.0"
     shimmer "^1.2.1"
 
 "@opentelemetry/propagator-jaeger@1.0.1":
