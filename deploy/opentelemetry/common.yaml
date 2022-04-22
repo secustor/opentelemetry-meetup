@@ -12,6 +12,11 @@ config:
       tls:
         insecure: true
 
+    jaeger:
+      endpoint: jaeger-collector:14250
+      tls:
+        insecure: true
+
     loki:
       endpoint: http://loki:3100/loki/api/v1/push
       #  tenant_id: "example"
@@ -44,6 +49,7 @@ config:
       traces:
         exporters:
           - otlp
+          - jaeger
         processors:
           - memory_limiter
           - batch
