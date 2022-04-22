@@ -3,6 +3,7 @@ namespaces:
   strimzi:
   monitoring:
   app:
+  unleash:
 
 helmRepos:
   ot-helm: "https://ot-container-kit.github.io/helm-charts/"
@@ -12,6 +13,7 @@ helmRepos:
   prometheus-community: https://prometheus-community.github.io/helm-charts
   ingress-nginx: https://kubernetes.github.io/ingress-nginx
   jaegertracing: https://jaegertracing.github.io/helm-charts
+  unleash: https://docs.getunleash.io/helm-charts
 
 apps:
   kube-prometheus:
@@ -72,6 +74,20 @@ apps:
     version: 0.28.0
     valuesFiles:
       - ./strimzi/values.yaml
+  unleash:
+    enabled: true
+    namespace: unleash
+    chart: unleash/unleash
+    version: 2.6.0
+    valuesFiles:
+      - ./unleash/values.yaml
+  jaeger:
+    enabled: true
+    namespace: monitoring
+    chart: jaegertracing/jaeger
+    version: 0.56.0
+    valuesFiles:
+      - ./jaeger/values.yaml
 
 # example applictions
   snapshot:

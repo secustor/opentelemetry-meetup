@@ -1,0 +1,7 @@
+ingress:
+  enabled: true
+  hosts:
+    - host: unleash.testing.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
