@@ -59,6 +59,24 @@ grafana:
 #           - "k8s.pod.name"
 #         lokiSearch: true
 
+   - name: Jaeger
+     access: proxy
+     editable: false
+     orgId: 1
+     type: jaeger
+     url: http://jaeger-query
+     version: 1
+     uid: default_jaeger
+     jsonData:
+       nodeGraph:
+         enabled: true
+       tracesToLogs:
+         datasourceUid: default_loki
+  #         tags:
+  #           - "k8s.namespace.name"
+  #           - "k8s.pod.name"
+  #         lokiSearch: true
+
   serviceMonitor:
     enabled: true
     additionalLabels:

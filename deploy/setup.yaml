@@ -81,6 +81,13 @@ apps:
     version: 2.6.0
     valuesFiles:
       - ./unleash/values.yaml
+  unleash-proxy:
+    enabled: true
+    namespace: unleash
+    chart: ./unleash-proxy
+    version: 0.1.0
+    valuesFiles:
+      - ./unleash-proxy/overwrites.yaml
   jaeger:
     enabled: true
     namespace: monitoring

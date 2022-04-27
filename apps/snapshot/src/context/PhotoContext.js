@@ -1,8 +1,8 @@
 import React, { createContext, useState } from "react";
 import axios from "axios";
 import { apiKey } from "../api/config";
-import {tracer} from "../instrumentation";
-import {SpanStatusCode, context, trace} from "@opentelemetry/api";
+import {traceProvider} from "../instrumentation";
+import {SpanStatusCode} from "@opentelemetry/api";
 
 export const PhotoContext = createContext();
 
@@ -10,16 +10,12 @@ const PhotoContextProvider = props => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const runSearchTracer = tracer
+  const runSearchTracer = traceProvider.getTracer('snapshot')
 
 
   const runSearch = query => {
-    const testSpan = trace.getSpan(context.active())
-    console.log(`TestSpan: ${testSpan}`)
-    console.log(`Context:`,context.active())
-
-    runSearchTracer.startActiveSpan("search images",(span, query) => {
-      runSearchTracer.startActiveSpan("query images", span => {  // https://github.com/open-telemetry/opentelemetry-js/issues/1923
+    runSearchTracer.startActiveSpan("search images",span => {
+      runSearchTracer.startActiveSpan("query images",{}, span => {  // https://github.com/open-telemetry/opentelemetry-js/issues/1923
         axios
             .get(
                 `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`
