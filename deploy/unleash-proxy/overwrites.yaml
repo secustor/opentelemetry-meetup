@@ -1,9 +1,7 @@
-image:
-  tag: 4.6.7
-
-env:
-  - name: INIT_ADMIN_API_TOKENS
-    value: "*:*.apiTokensdklfslkdflsdlkfskdfjksdkf"
+unleash:
+  url: "http://unleash:4242/api"
+  apiToken: "*:development.354241ff38f11e42dff3de8c478b18fc07896df0104853afd0750a4e"
+  clientKeys: ["clientKeyslkfsdklfkslfd"]
 
 ingress:
   enabled: true
@@ -14,7 +12,7 @@ ingress:
     nginx.ingress.kubernetes.io/cors-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,traceparent,tracestate,Uber-Trace-Id
 
   hosts:
-    - host: unleash.testing.com
+    - host: unleash-proxy.testing.com
       paths:
         - path: /
           pathType: ImplementationSpecific
