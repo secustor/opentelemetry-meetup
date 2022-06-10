@@ -20,7 +20,7 @@ apps:
     enabled: true
     namespace: monitoring
     chart: prometheus-community/kube-prometheus-stack
-    version: 34.10.0
+    version: 35.5.3
     valuesFiles:
       -  ./kube-prometheus/values.yaml
     priority: -100
