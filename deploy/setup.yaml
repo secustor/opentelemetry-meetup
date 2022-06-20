@@ -92,7 +92,7 @@ apps:
     enabled: true
     namespace: monitoring
     chart: jaegertracing/jaeger
-    version: 0.56.0
+    version: 0.56.8
     valuesFiles:
       - ./jaeger/values.yaml
 
