@@ -1281,10 +1281,10 @@
     semver "^7.3.2"
     shimmer "^1.2.1"
 
-"@opentelemetry/plugin-react-load@^0.26.1":
-  version "0.26.1"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/plugin-react-load/-/plugin-react-load-0.26.1.tgz#b24f118c80cb39428cebf43600ad1fd9b3ee7c0f"
-  integrity sha512-UbbpukNtAjGPpGok+Wb0stPCpO3ymH+/wfH9+dKij8UVQ6SOaUp+B+AGiRrtXNFD0HoyudsBlsmNgHH9+MEl9g==
+"@opentelemetry/plugin-react-load@^0.28.0":
+  version "0.28.1"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/plugin-react-load/-/plugin-react-load-0.28.1.tgz#8f5300a9f9fd21db78b11ff190d606df5bf882dc"
+  integrity sha512-H165Jlw+fi1C7g/jy0/l2RpCLTw6IfGo8yjVxpFEUR9PUV4HfXUL8sFVDnf+RL2ig52G1CrLtBaYdW2NefPOjw==
   dependencies:
     "@opentelemetry/context-zone" "^1.0.0"
     "@opentelemetry/core" "^1.0.0"
