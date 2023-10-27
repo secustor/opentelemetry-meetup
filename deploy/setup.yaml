@@ -47,7 +47,7 @@ apps:
     wait: true # wait till ready, else it will to call the ingress admission webhooks
     namespace: ingress
     chart: ingress-nginx/ingress-nginx
-    version: 4.7.1
+    version: 4.8.3
     valuesFiles:
       - ./ingress-nginx/values.yaml
     priority: -90
@@ -71,7 +71,7 @@ apps:
     enabled: true
     namespace: strimzi
     chart: strimzi/strimzi-kafka-operator
-    version: 0.35.1
+    version: 0.38.0
     valuesFiles:
       - ./strimzi/values.yaml
   unleash:
@@ -92,7 +92,7 @@ apps:
     enabled: true
     namespace: monitoring
     chart: jaegertracing/jaeger
-    version: 0.71.8
+    version: 0.71.17
     valuesFiles:
       - ./jaeger/values.yaml
 
