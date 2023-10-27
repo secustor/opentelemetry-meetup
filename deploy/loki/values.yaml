@@ -2,3 +2,12 @@ serviceMonitor:
   enabled: true
   additionalLabels:
     prometheus: kube-prometheus
+
+read:
+  replicas: 1
+  
+write:
+  replicas: 1
+
+backend:
+  replicas: 1
