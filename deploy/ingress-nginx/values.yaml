@@ -1,22 +1,18 @@
 
 controller:
   # forward traces to otlp collector running on the same node
-  # TODO replace with open telemetry if available https://github.com/kubernetes/ingress-nginx/pull/7621
   config:
-    enable-opentracing: true
-    jaeger-endpoint: http://${HOST_IP}:14268/api/traces
-    jaeger-propagation-format: jaeger
-    jaeger-service-name: nginx-ingress
-  #    jaeger-collector-host: ${HOST_IP}
-  #    jaeger-collector-port: 14268 # jaeger thrift
-  #    jaeger-collector-port: 14250 # jaeger grpc
+    enable-opentelemetry: true
+    otlp-collector-host: ${HOST_IP}
+
   extraEnvs:
   - name: HOST_IP
     valueFrom:
       fieldRef:
         fieldPath: status.hostIP
-
-
+  
+  opentelemetry:
+    enabled: true
 
   watchIngressWithoutClass: true
   metrics:
@@ -34,3 +30,6 @@ controller:
     enabled: true
   service:
     type: NodePort
+
+defaultBackend:
+  enabled: true

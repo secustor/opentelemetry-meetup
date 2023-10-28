@@ -82,11 +82,12 @@ grafana:
       prometheus: kube-prometheus
 
 # activate tracing of Grafana
-  env:
-    JAEGER_AGENT_PORT: 6831
+  grafana.ini:
+    tracing.opentelemetry.otlp:
+      address: $__env{COLLECTOR_HOST}:4317
 
   envValueFrom:
-    JAEGER_AGENT_HOST:
+    COLLECTOR_HOST:
       fieldRef:
         fieldPath: status.hostIP
 
