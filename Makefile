@@ -11,6 +11,7 @@ APP_SNAPSHOT_IMAGE?=localhost/snapshot:test
 APP_PRODUCER_IMAGE?=localhost/producer:test
 APP_CONSUMER_IMAGE?=localhost/consumer:test
 
+full-setup: create-kind-cluster deploy-all
 
 # prepare setup
 create-kind-cluster:
@@ -19,6 +20,7 @@ create-kind-cluster:
 set-context:
 	kubectl config set-context kind-${KIND_CLUSTER_NAME}
 
+deploy-all: prepare-apps prepare-environment
 prepare-environment: deploy-setup deploy-kafka
 
 deploy-setup:

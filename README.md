@@ -26,6 +26,8 @@ To make it work you have to rewrite the DNS answers to localhost.
 For Linux it has been as simple as adding this line to your network manager ( tested with Arch/Gnome )     
 `echo "address=/testing.com/127.0.0.1" > /etc/NetworkManager/dnsmasq.d/testDomains.conf`
 
+To completly create the setup run `make full-setup`
+
 ### Create Cluster
 To create a kind cluster and add the kubecontext to your config run `make create-kind-cluster`     
 
