@@ -1,7 +1,7 @@
 {
   "$schema":"https://docs.renovatebot.com/renovate-schema.json",
   "extends":[
-    "config:base"
+    "config:best-practices"
   ],
   "helmsman": {
     "fileMatch": [
@@ -12,6 +12,17 @@
     {
       "matchManagers": ["helmsman"],
       "groupName": "helm releases"
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["opentelemetry-collector/Chart.yaml"],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*)"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "otel/opentelemetry-collector-contrib"
     }
   ]
 }
