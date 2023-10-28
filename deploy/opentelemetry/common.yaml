@@ -18,7 +18,7 @@ config:
         insecure: true
 
     loki:
-      endpoint: http://loki:3100/loki/api/v1/push
+      endpoint: http://loki-gateway:3100/loki/api/v1/push
       #  tenant_id: "example"
       labels:
         attributes:

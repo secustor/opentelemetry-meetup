@@ -12,9 +12,8 @@ grafana:
      uid: default_loki
      access: proxy
      editable: false
-     orgId: 1
      type: loki
-     url: http://loki:3100
+     url: http://loki-gateway
      version: 1
      jsonData:
        maxLines: 1000
