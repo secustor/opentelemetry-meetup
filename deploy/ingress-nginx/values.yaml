@@ -3,13 +3,7 @@ controller:
   # forward traces to otlp collector running on the same node
   config:
     enable-opentelemetry: true
-    otlp-collector-host: ${HOST_IP}
-
-  extraEnvs:
-  - name: HOST_IP
-    valueFrom:
-      fieldRef:
-        fieldPath: status.hostIP
+    otlp-collector-host: "otlp-collector-opentelemetry-collector.monitoring.svc.cluster.local"
   
   opentelemetry:
     enabled: true

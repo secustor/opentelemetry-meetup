@@ -1,11 +1,16 @@
-allInOne:
-  enabled: true
-
 agent:
-  enabled: false
+  enabled: true
   
 collector:
-  enabled: false
+  enabled: true
+  service:
+    otlp:
+      grpc:
+        name: otlp-grpc
+        port: 4317
+      http:
+        name: otlp-http
+        port: 4318
   
 query:
-  enabled: false
+  enabled: true
