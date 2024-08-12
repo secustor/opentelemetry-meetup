@@ -3,7 +3,7 @@ module kafka-example
 go 1.17
 
 require (
-	github.com/Shopify/sarama v1.32.0
+	github.com/Shopify/sarama v1.43.3
 	go.opentelemetry.io/contrib/instrumentation/github.com/Shopify/sarama/otelsarama v0.31.0
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.31.0
 	go.opentelemetry.io/contrib/propagators/jaeger v1.6.0
